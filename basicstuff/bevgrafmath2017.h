@@ -11,7 +11,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 #define __BGM_FORMAT_B "%5s"
 #define __BGM_FORMAT_I "%9d"
-#define __BGM_FORMAT_F "%9.4f"
+#define __BGM_FORMAT_F "%9.14f"
 
 ///////////////////////////////////////////////////////////////////////////////
 // 2D vektor
@@ -1391,17 +1391,26 @@ inline float half_pi()
 	return s_halfPi;
 }
 
+
+///////////////////////////////////////////////////////////////////////////////
+// Lebegopontos egyenloseg
+///////////////////////////////////////////////////////////////////////////////
+inline bool floatEqual(float a, float b, float sensitivity = 1.0e-8f)
+{
+	return fabs(a - b) < sensitivity;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Fok-radian konverziok
 ///////////////////////////////////////////////////////////////////////////////
-static float radToDeg(float val)
+inline float radToDeg(float val)
 {
 	static const float s_radToDeg = 180.0f / pi();
 
 	return val * s_radToDeg;
 }
 
-static float degToRad(float val)
+inline float degToRad(float val)
 {
 	static const float s_degToRad = pi() / 180.0f;
 
@@ -1781,17 +1790,41 @@ inline mat4 scale(vec3 v)
 inline mat3 windowToViewport2(vec2 windowPos, vec2 windowSize, vec2 viewportPos, vec2 viewportSize)
 {
 	return 
-		translate(viewportPos) * 
-		scale(vec2(viewportSize.x / windowSize.x, viewportSize.y / windowSize.y)) * 
-		translate(-windowPos);
+        translate(viewportPos) *
+        scale(vec2(viewportSize.x / windowSize.x, viewportSize.y / windowSize.y)) *
+        translate(-windowPos);
 }
 
 inline mat4 windowToViewport3(vec2 windowPos, vec2 windowSize, vec2 viewportPos, vec2 viewportSize)
 {
-	return 
-		translate(viewportPos) * 
-		scale(vec2(viewportSize.x / windowSize.x, viewportSize.y / windowSize.y)) * 
-		translate(-windowPos);
+	return
+        translate(vec3(viewportPos.x, viewportPos.y, 0)) *
+        scale(vec3(viewportSize.x / windowSize.x, viewportSize.y / windowSize.y, 1)) *
+        translate(vec3(-windowPos.x, -windowPos.y, 0));
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Transzformaciok - koordinata transzformacio
+///////////////////////////////////////////////////////////////////////////////
+inline mat3 coordinateTransform(vec2 d, vec2 i, vec2 j)
+{
+	mat3 result;
+
+	result[0] = vec3(i, -dot(d, i));
+	result[1] = vec3(j, -dot(d, j));
+
+	return result;
+}
+
+inline mat4 coordinateTransform(vec3 d, vec3 i, vec3 j, vec3 k)
+{
+	mat4 result;
+
+	result[0] = vec4(i, -dot(d, i));
+	result[1] = vec4(j, -dot(d, j));
+	result[2] = vec4(k, -dot(d, k));
+
+	return result;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

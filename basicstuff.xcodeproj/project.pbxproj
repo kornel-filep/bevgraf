@@ -27,11 +27,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3559AAD93DD8A12DA70E2D60 /* bevgrafmath2017.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bevgrafmath2017.h; sourceTree = "<group>"; };
 		9A4920F11F7A71F8000006A2 /* basicstuff */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = basicstuff; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A4920F41F7A71F8000006A2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		9A4920FC1F7A7219000006A2 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		9A4920FE1F7A7272000006A2 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
-		9A7BD25A1F7A7DBA000F9989 /* bevgrafmath2017.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bevgrafmath2017.h; path = ../../../BevGraf/bevgrafmath2017.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,8 +69,8 @@
 		9A4920F31F7A71F8000006A2 /* basicstuff */ = {
 			isa = PBXGroup;
 			children = (
-				9A7BD25A1F7A7DBA000F9989 /* bevgrafmath2017.h */,
 				9A4920F41F7A71F8000006A2 /* main.cpp */,
+				3559AAD93DD8A12DA70E2D60 /* bevgrafmath2017.h */,
 			);
 			path = basicstuff;
 			sourceTree = "<group>";
@@ -186,6 +186,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
