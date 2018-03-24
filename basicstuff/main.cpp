@@ -55,6 +55,7 @@ void bezier(int pontokSzama, vec2 p1, vec2 p2, vec2 p3, vec2 p4){
 
 void hermite(vec2 p1, vec2 p2, vec2 p3, vec2 p4){
     G = {p1,p2,p3,p4};
+
     vec2 Q;
     glBegin(GL_LINE_STRIP);
     for (double t = T0; t<=T2; t+= 0.001){
@@ -107,6 +108,8 @@ void display()
     bezier(4,points[0],points[1],points[2],points[3]); // pontjai 0,1,2,3
     bezier(4,points[3],points[4],points[5],points[6]); // pontjai 3,4,5,6 ahol 3 ugyan az mint az elozoe, 4 pedig szamoljuk az erintot.
     bezier(4,points[6],points[7],points[8],points[9]); // kozos a 6, a 7et meg szamoljuk
+    vec2 erinto = points[10]-points[9];
+    hermite(points[12],points[11],points[10], erinto);
 
     glutSwapBuffers();
 }
@@ -148,10 +151,10 @@ void init()
     glPointSize(8.0);
     glLineWidth(1.5);
     glLineStipple(1, 0xFF00);
-    M ={{static_cast<float>(pow(T0,3.0)),static_cast<float>(pow(T1,3.0)),static_cast<float>(pow(T2,3.0)),static_cast<float>(pow(T3,3.0))},
-            {static_cast<float>(pow(T0,2.0)),static_cast<float>(pow(T1,2.0)),static_cast<float>(pow(T2,2.0)),static_cast<float>(pow(T3,2.0))},
-            {static_cast<float>(pow(T0,1.0)),static_cast<float>(pow(T1,1.0)),static_cast<float>(pow(T2,1.0)),static_cast<float>(pow(T3, 1.0))},
-            {static_cast<float>(pow(T0,0)),static_cast<float>(pow(T1,0)),static_cast<float>(pow(T2,0)),static_cast<float>(pow(T3,0))}};
+    M ={{static_cast<float>(pow(T0,3.0)),static_cast<float>(pow(T1,3.0)),static_cast<float>(pow(T2,3.0)),static_cast<float>(3.0*pow(T3,2.0))},
+            {static_cast<float>(pow(T0,2.0)),static_cast<float>(pow(T1,2.0)),static_cast<float>(pow(T2,2.0)),static_cast<float>(2.0*pow(T3,1.0))},
+            {static_cast<float>(pow(T0,1.0)),static_cast<float>(pow(T1,1.0)),static_cast<float>(pow(T2,1.0)),static_cast<float>(1)},
+            {static_cast<float>(pow(T0,0)),static_cast<float>(pow(T1,0)),static_cast<float>(pow(T2,0)),static_cast<float>(0)}};
 
     M = inverse(M);
     printMathObject(M);
@@ -163,7 +166,7 @@ void processMouse(GLint button, GLint action, GLint xMouse, GLint yMouse)
 
     GLint i;
     if (button == GLUT_LEFT_BUTTON && action == GLUT_DOWN){
-        if ((i = getActivePoint1(points, 10, 8, xMouse, winHeight - yMouse)) != -1){
+        if ((i = getActivePoint1(points, 18, 8, xMouse, winHeight - yMouse)) != -1){
             dragged = i;}
     }
 

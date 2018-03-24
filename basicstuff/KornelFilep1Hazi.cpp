@@ -87,16 +87,7 @@ void hermite(){
     //Iteralas t alapjan
     for (double t = -2; t<=1.5; t+= 0.001){
         vec4 tk = {static_cast<float>(pow(t,3)), static_cast<float>(pow(t,2)), static_cast<float>(pow(t,1)), static_cast<float>(pow(t,0))};
-        /*double Qx = points[0].x*(M[0][0]*pow(t,3)+M[0][1]*pow(t,2)+M[0][2]*pow(t,1)+M[0][3]*pow(t,0))+
-                points[1].x*(M[1][0]*pow(t,3)+M[1][1]*pow(t,2)+M[1][2]*pow(t,1)+M[1][3]*pow(t,0))+
-                points[2].x*(M[2][0]*pow(t,3)+M[2][1]*pow(t,2)+M[2][2]*pow(t,1)+M[2][3]*pow(t,0))+
-                erinto.x*(M[3][0]*pow(t,3)+M[3][1]*pow(t,2)+M[3][2]*pow(t,1)+M[3][3]*pow(t,0));
 
-        double Qy = points[0].y*(M[0][0]*pow(t,3)+M[0][1]*pow(t,2)+M[0][2]*pow(t,1)+M[0][3]*pow(t,0))+
-                points[1].y*(M[1][0]*pow(t,3)+M[1][1]*pow(t,2)+M[1][2]*pow(t,1)+M[1][3]*pow(t,0))+
-                points[2].y*(M[2][0]*pow(t,3)+M[2][1]*pow(t,2)+M[2][2]*pow(t,1)+M[2][3]*pow(t,0))+
-                erinto.y*(M[3][0]*pow(t,3)+M[3][1]*pow(t,2)+M[3][2]*pow(t,1)+M[3][3]*pow(t,0));
-        */
 
         Q = G*M*tk;
 
